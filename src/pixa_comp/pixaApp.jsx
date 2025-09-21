@@ -16,10 +16,10 @@ const PixaApp = () => {
 
   const doApi = async (query) => {
     setItems([]);
-    const url = `https://pixabay.com/api/?key=${API_KEY}&q=${encodeURIComponent(query)}&image_type=photo&per_page=3&safesearch=true`;
+const url = `https://pixabay.com/api/?key=${API_KEY}&q=${encodeURIComponent(query)}&image_type=photo&per_page=12&safesearch=true`;
     try {
       const { data } = await axios.get(url);
-      setItems((data?.hits || []).slice(0, 3));
+setItems(data?.hits || []);
     } catch (err) {
       console.log(err);
       alert('There was a problem fetching images');

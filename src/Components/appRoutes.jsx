@@ -7,6 +7,7 @@ import Counter from '../Components/counter';
 import Counter2 from '../Components/counter2';
 import AppAtlas from "../comp_atlas/appAtlas";
 import PixaApp from "../pixa_comp/pixaApp";
+import VipApp from "../vip_copm/vipApp";
 
 export default function AppRoutes() {
   const [number, setNumber] = useState(33);
@@ -28,7 +29,8 @@ export default function AppRoutes() {
           <Link to="/counter">Counter</Link> |
           <Link to="/counter2">Counter2</Link> |
           <Link to="/atlas">Atlas</Link> |
-          <Link to="/pixa/cats">Pixa</Link>
+          <Link to="/pixa/cats">Pixa</Link> |
+          <Link to="/vip">Vip</Link>
         </header>
 
         <Routes>
@@ -37,8 +39,8 @@ export default function AppRoutes() {
           <Route path="/counter" element={<Counter />} />
           <Route path="/counter2" element={<Counter2 />} />
           <Route path="/atlas" element={<AppAtlas />} />
-
           <Route path="/pixa/:term" element={<PixaApp />} />
+          <Route path="/vip" element={<VipApp />} />
         </Routes>
       </AppContext.Provider>
 
