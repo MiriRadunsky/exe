@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { getPixaImages } from '../service/getPixa';
 import PixaInput from './pixaInput';
 import PixaInfo from './pixaInfo'; 
 
@@ -16,10 +16,21 @@ const PixaApp = () => {
 
   const doApi = async (query) => {
     setItems([]);
-const url = `https://pixabay.com/api/?key=${API_KEY}&q=${encodeURIComponent(query)}&image_type=photo&per_page=12&safesearch=true`;
+    const localKey = `pixa_${query}`;
+    const cached = localStorage.getItem(localKey);
+    if (cached) {
+      try {
+        const images = JSON.parse(cached);
+        setItems(images);
+        return;
+      } catch (e) {
+       
+      }
+    }
     try {
-      const { data } = await axios.get(url);
-setItems(data?.hits || []);
+      const images = await getPixaImages(query, API_KEY);
+      setItems(images);
+      localStorage.setItem(localKey, JSON.stringify(images));
     } catch (err) {
       console.log(err);
       alert('There was a problem fetching images');
